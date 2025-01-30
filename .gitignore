@@ -1,0 +1,22 @@
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+#*.jar //we decided to upload the jar with dependecies for teaching puporses, tschlenther may '20
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+/.settings/
+/.project
+/.classpath
+/target/
+/output/
+/bin/
+
+/.idea/
+*.iml
+/matsim-maas-master-SNAPSHOT.jar
