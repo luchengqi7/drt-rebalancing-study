@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>org.matsim</groupId>
 		<artifactId>matsim-all</artifactId>
-		<version>16.0-2024w15</version>
+		<version>2025.0-PR3559</version>
 		<relativePath/>
 	</parent>
 
@@ -39,7 +39,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.matsim.contrib</groupId>
-			<artifactId>taxi</artifactId>
+			<artifactId>application</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
@@ -96,7 +96,7 @@
 							<transformers>
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<manifestEntries>
-										<Main-Class>org.matsim.maas.RunMaasGui</Main-Class>
+										<Main-Class>org.matsim.rebalancing.RunMaasGui</Main-Class>
 										<Specification-Vendor>org.matsim</Specification-Vendor>
 										<Implementation-Vendor>org.matsim</Implementation-Vendor>
 										<Implementation-Version>${project.version}</Implementation-Version>

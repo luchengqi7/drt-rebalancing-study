@@ -3,7 +3,7 @@
  *                                                                         *
  * *********************************************************************** *
  *                                                                         *
- * copyright       : (C) 2016 by the members listed in the COPYING,        *
+ * copyright       : (C) 2017 by the members listed in the COPYING,        *
  *                   LICENSE and WARRANTY file.                            *
  * email           : info at matsim dot org                                *
  *                                                                         *
@@ -17,35 +17,36 @@
  *                                                                         *
  * *********************************************************************** */
 
-package org.matsim.maas.taxi;
+package org.matsim.rebalancing.run;
 
+import org.matsim.contrib.drt.run.DrtControlerCreator;
+import org.matsim.contrib.drt.run.MultiModeDrtConfigGroup;
 import org.matsim.contrib.dvrp.run.DvrpConfigGroup;
-import org.matsim.contrib.taxi.run.MultiModeTaxiConfigGroup;
-import org.matsim.contrib.taxi.run.TaxiControlerCreator;
 import org.matsim.core.config.Config;
 import org.matsim.core.config.ConfigUtils;
+import org.matsim.core.controler.Controler;
 import org.matsim.vis.otfvis.OTFVisConfigGroup;
 
 /**
- * This class runs an example robotaxi scenario including fares. The simulation runs for 10 iterations, this takes
- * quite a bit time (25 minutes or so). You may switch on OTFVis visualisation in the main method below. The scenario
- * should run out of the box without any additional files. If required, you may find all input files in the resource
- * path or in the jar maven has downloaded). There are two vehicle files: 2000 vehicles and 5000, which may be set in
- * the config. Different fleet sizes can be created using
- * {@link org.matsim.contrib.av.robotaxi.vehicles.CreateTaxiVehicles}
+ * @author jbischoff
+ * An example to run the demand responsive transport contribution in MATSim, with DRT service
+ * serving customers in between stops.
+ * The stops are defined using the Transit Schedule file format.
+ * You'll find the scenario in the "scenario" folder of the project.
  */
-public class RunRobotaxiExample {
-	public static final String CONFIG_FILE = "scenarios/cottbus/robotaxi_config.xml";
+public class RunStopBasedDrtExample {
 
-	public static void main(String[] args) {
-		RunRobotaxiExample.run(CONFIG_FILE, false, 10);
+	public static void run(Config config, boolean otfvis) {
+		//Creates a MATSim Controler and preloads all DRT related packages
+		Controler controler = DrtControlerCreator.createControler(config, otfvis);
+
+		//starts the simulation
+		controler.run();
 	}
 
-	public static void run(String configFile, boolean otfvis, int lastIteration) {
-		Config config = ConfigUtils.loadConfig(configFile, new DvrpConfigGroup(), new OTFVisConfigGroup(),
-				new MultiModeTaxiConfigGroup());
-		config.controller().setLastIteration(lastIteration);
-
-		TaxiControlerCreator.createControler(config, otfvis).run();
+	public static void main(String[] args) {
+		Config config = ConfigUtils.loadConfig("scenarios/cottbus/drtconfig_stopbased.xml",
+				new MultiModeDrtConfigGroup(), new DvrpConfigGroup(), new OTFVisConfigGroup());
+		run(config, false);
 	}
 }

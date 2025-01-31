@@ -17,23 +17,16 @@
  *                                                                         *
  * *********************************************************************** */
 
-package org.matsim.maas.taxi;/*
+package org.matsim.rebalancing.run;/*
  * created by jbischoff, 06.09.2018
  */
 
 import org.junit.jupiter.api.Test;
 
-public class TaxiTest {
-
-
-    @Test
-    public void runRulebasedTaxiScenario() {
-        RunTaxiExample.run(RunTaxiExample.CONFIG_FILE_RULEBASED, false, 0);
-    }
-
+public class RunStopBasedDrtExampleTest {
 
     @Test
-    public void runAssignmentTaxiScenario() {
-        RunTaxiExample.run(RunTaxiExample.CONFIG_FILE_ASSIGNMENT, false, 0);
+    public void testDrtStopBased() {
+		RunStopBasedDrtExample.main(new String[] { "" });
     }
 }
